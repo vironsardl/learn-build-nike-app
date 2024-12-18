@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import {
   View,
   Text,
@@ -11,9 +11,12 @@ import {
 } from "react-native";
 import products from "../data/products";
 import { IonIcons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
+
 
 const ProductDetailScreen = () => {
-  const product = products[0];
+
+  const product = useSelector((state) => state.products.selectedProduct);
   const { width } = useWindowDimensions();
   const addToCart = () => {
     console.log("Add to Cart");
@@ -41,7 +44,7 @@ const ProductDetailScreen = () => {
           <Text style={styles.title}>{product.name}</Text>
 
           {/* Price */}
-          <Text style={styles.title}>USD {product.price}</Text>
+          <Text style={styles.title}>{product.price} USD</Text>
 
           {/* Description */}
           <Text style={styles.description}>{product.description}</Text>
