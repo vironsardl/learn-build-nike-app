@@ -11,15 +11,18 @@ import {
 } from "react-native";
 import products from "../data/products";
 import { IonIcons } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cartSlice } from "../store/cartSlice";
 
 
 const ProductDetailScreen = () => {
 
   const product = useSelector((state) => state.products.selectedProduct);
+  const dispatch = useDispatch();
+
   const { width } = useWindowDimensions();
   const addToCart = () => {
-    console.log("Add to Cart");
+    dispatch(cartSlice.actions.addCartItem({product: product}));
   }
 
   return (
